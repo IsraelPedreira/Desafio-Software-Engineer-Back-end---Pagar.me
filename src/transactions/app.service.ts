@@ -30,7 +30,7 @@ export class AppService {
 
     const transaction = await this.prisma.transaction.create({
       data: {
-        amount: body.amount,
+        amount: Number(body.amount.toFixed(2)),
         description: body.description,
         paymentMethod: body.paymentMethod,
         cardNumber: cardNumber,
@@ -95,7 +95,7 @@ export class AppService {
         waitingAmount += payable.amount;
       }
     });
-    const amount = {availableAmount, waitingAmount};
+    const amount = {availableAmount: availableAmount.toFixed(2), waiting_funds: waitingAmount.toFixed(2)};
 
     return amount;
   }
