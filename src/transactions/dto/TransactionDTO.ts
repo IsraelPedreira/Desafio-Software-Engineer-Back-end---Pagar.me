@@ -17,7 +17,7 @@ export class TransactionDTO {
     cardNumber: string;
 
     @IsNotEmpty()
-    cardExpiringDate: Date;
+    cardExpiringDate: string;
 
     @IsNotEmpty()
     cvv: string;

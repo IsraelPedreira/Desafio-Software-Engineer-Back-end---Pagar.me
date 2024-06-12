@@ -7,7 +7,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post()
-  async getHello(@Body() body:TransactionDTO): Promise<any> {
+  async createTransaction(@Body() body:TransactionDTO): Promise<any> {
     const transaction = await this.appService.createTransaction(body);
     const payable = await this.appService.createPayable(transaction);
 

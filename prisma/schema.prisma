@@ -19,7 +19,7 @@ model Transaction{
   description String
   date        DateTime
   cardNumber  String
-  cardExpiringDate  DateTime
+  cardExpiringDate  String
   cvv     String
   paymentMethod PaymentMethod
 

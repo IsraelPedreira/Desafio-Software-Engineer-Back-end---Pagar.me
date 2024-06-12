@@ -1,23 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 import { TransactionDTO } from './dto/TransactionDTO';
 import { PayableDTO } from './dto/PayableDTO';
 
 @Injectable()
 export class AppService {
-  constructor(private prisma: PrismaService) {}
+  constructor(public prisma: PrismaService) {}
 
   async createTransaction(body:TransactionDTO): Promise<TransactionDTO> {
     //save just 4 digits of the card number
     const cardNumber = body.cardNumber.slice(-4);
 
     //handle card expiration date
-    const stringCardExpiringDate = String(body.cardExpiringDate);
-    if (stringCardExpiringDate.length !== 7) {
+    const cardExpiringDateBody = body.cardExpiringDate.split("/");
+    if (body.cardExpiringDate.length !== 7) {
       throw new Error("Invalid card expiration date format");
     }
 
-    const cardExpiringDateBody = stringCardExpiringDate.split("/");
     const month = cardExpiringDateBody[0];
     const year = cardExpiringDateBody[1];
     const cardExpirationDate = new Date(parseInt(year), parseInt(month) - 1);
@@ -34,7 +33,7 @@ export class AppService {
         description: body.description,
         paymentMethod: body.paymentMethod,
         cardNumber: cardNumber,
-        cardExpiringDate: cardExpirationDate,
+        cardExpiringDate: body.cardExpiringDate,
         cvv: body.cvv,
         date: new Date()
       }
