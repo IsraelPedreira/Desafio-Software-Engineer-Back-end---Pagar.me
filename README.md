@@ -10,7 +10,7 @@ https://documenter.getpostman.com/view/23183448/2sA3XPBN3X
 $ npm install
 ```
 
-## Running the app
+## Execução
 
 ```bash
 # development
@@ -23,7 +23,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Testes
 
 ```bash
 # unit tests
